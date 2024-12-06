@@ -20,3 +20,4 @@ class Solution:
 nums = [0,3,2,4,6,1,100,45,45,47]
 solution = Solution()
 print(solution.longestConsecutive(nums))
+
