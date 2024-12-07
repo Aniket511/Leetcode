@@ -33,50 +33,37 @@ Follow up: Your algorithm's time complexity must be better than O(n log n), wher
 """
 
 import heapq
+
 class Solution:
     def topKFrequent(self, nums: list[int], k: int) -> list[int]:
-        #Solution 1 
-        # Time Complexity O(nlogk)
-        #
+        # Step 1: Create a frequency counter dictionary
         counter = {}
         for n in nums:
             counter[n] = 1 + counter.get(n, 0)
         
+        # Step 2: Create a max-heap based on the frequency of elements
         heap = []
         for key, val in counter.items():
+            # Use negative frequency to simulate max-heap (Python's heapq is a min-heap by default)
             heapq.heappush(heap, (-val, key))
         
+        # Step 3: Extract the top k frequent elements from the heap
         res = []
         while len(res) < k:
             res.append(heapq.heappop(heap)[1])
         
         return res
 
-        # #Solution 2
-        # # Step 1: Count the frequency of each number
-        # hashmap = {}
-        # for element in nums:
-        #     hashmap[element] = 1 + hashmap.get(element, 0)
+# Time Complexity:
+# O(n log k), where n is the number of elements in `nums` and k is the number of top frequent elements to return.
+# The frequency count takes O(n), building the heap takes O(n log k), and extracting k elements from the heap takes O(k log k).
 
-        # # Step 2: Create a list of buckets based on frequency
-        # array = [[] for numbers in range(len(nums) + 1)]
-        # for key, value in hashmap.items():
-        #     array[value].append(key)
+# Space Complexity:
+# O(n), where n is the number of unique elements in `nums`. The counter dictionary and heap both store up to n elements.
 
-        # # Step 3: Gather the top k frequent elements
-        # result = []
-        # for m in range(len(array) - 1, 0, -1):
-        #     for num in array[m]:
-        #         result.append(num)
-        #         if len(result) == k:  # Stop when we have k elements
-        #             return result
-        
-        # return result  # Return the result if less than k elements are found
-
-
-
-nums = [78,78,34,34,34,20,20,20,20,20,55,55,55,55,55]
+# Test case
+nums = [78, 78, 34, 34, 34, 20, 20, 20, 20, 20, 55, 55, 55, 55, 55]
 k = 2
 solution = Solution()
 answer = solution.topKFrequent(nums, k)
-print(answer)
+print(answer)  # Expected output: [20, 55], because 20 and 55 are the two most frequent numbers
