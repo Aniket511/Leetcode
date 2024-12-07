@@ -1,32 +1,38 @@
-from collections import defaultdict
 class Solution:
     def isValidSudoku(self, board: list[list[str]]) -> bool:
-        rows = defaultdict(set)
-        cols = defaultdict(set)
-        boxes = defaultdict(set)
-        
+        rows = [0] * 9
+        cols = [0] * 9
+        squares = [0] * 9
+
         for r in range(9):
             for c in range(9):
                 if board[r][c] == ".":
                     continue
                 
-                if board[r][c] in rows[r] or board[r][c] in cols[c] or board[r][c] in boxes[(r // 3, c // 3)]:
+                val = int(board[r][c]) - 1
+                if (1 << val) & rows[r]:
                     return False
-                
-                rows[r].add(board[r][c])
-                cols[c].add(board[r][c])
-                boxes[(r // 3, c // 3)].add(board[r][c])
-        
+                if (1 << val) & cols[c]:
+                    return False
+                if (1 << val) & squares[(r // 3) * 3 + (c // 3)]:
+                    return False
+                    
+                rows[r] |= (1 << val)
+                cols[c] |= (1 << val)
+                squares[(r // 3) * 3 + (c // 3)] |= (1 << val)
+
         return True
 
-board = [["4","2",".",".","3",".",".",".","."],
-        ["4",".",".","5",".",".",".",".","."],
+board = [
+        ["4","2",".",".","3",".",".",".","."],
+        ["1",".",".","5",".",".",".",".","."],
         [".","9","8",".",".",".",".",".","3"],
         ["5",".",".",".","6",".",".",".","4"],
         [".",".",".","8",".","3",".",".","5"],
         ["7",".",".",".","2",".",".",".","6"],
         [".",".",".",".",".",".","2",".","."],
         [".",".",".","4","1","9",".",".","8"],
-        [".",".",".",".","8",".",".","7","9"]]
+        [".",".",".",".","8",".",".","7","9"]
+        ]
 solution = Solution()
 print(solution.isValidSudoku(board))
