@@ -48,7 +48,7 @@ class Solution:
                     continue
                 
                 # Step 4: Convert the current cell value (which is a string) to an integer.
-                num = int(board[r][c]) - 1  # Convert '1' to 0, '2' to 1, ..., '9' to 8
+                num = int(board[r][c]) - 1  # Convert '1' to 0, '2' to 1, ..., '9' to 8 to convert to zero-based indexing
 
                 # Step 5: Check if the number has already been seen in the current row, column, or square.
                 # We use bitwise AND to check if the bit corresponding to the number is already set.
