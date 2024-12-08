@@ -3,20 +3,15 @@
 
 Medium
 
-Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
-
- 
+Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order. 
 
 Example 1:
-
 Input: nums = [1,1,1,2,2,3], k = 2
 Output: [1,2]
 
 Example 2:
-
 Input: nums = [1], k = 1
 Output: [1]
-
 """
 
 class Solution:
@@ -57,9 +52,7 @@ answer = solution.topKFrequent(nums, k)
 print(answer)  # Expected output: [20, 55]
 
 """
-
 Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
-
 """
 import heapq
 
@@ -68,22 +61,22 @@ class Solution:
         # Step 1: Create a frequency counter dictionary
         count = {}
         for num in nums:
-            count[num] = 1 + count.get(num, 0)
+            count[num] = 1 + count.get(num, 0)  # Count occurrences of each number
 
         # Step 2: Create a min-heap of size k to store the top k frequent elements
-        heap = []
+        heap = []  # Initialize an empty list to be used as a min-heap
         for num, freq in count.items():
-            heapq.heappush(heap, (freq, num))
+            heapq.heappush(heap, (freq, num))  # Push (frequency, number) pair onto the heap
             # Ensure the heap size does not exceed k
             if len(heap) > k:
-                heapq.heappop(heap)
+                heapq.heappop(heap)  # Remove the least frequent element if heap size exceeds k
 
         # Step 3: Extract the top k frequent elements from the heap
-        res = []
+        res = []  # List to store the result
         while heap:
-            res.append(heapq.heappop(heap)[1])
-        
-        return res  # Return most frequent first
+            res.append(heapq.heappop(heap)[1])  # Extract the 'number' part of (frequency, number)
+
+        return res  # Return most frequent first (heap contains the k most frequent elements)
 
 # Time Complexity:
 # O(n log k), where n is the number of elements in `nums` and k is the number of top frequent elements to return.
@@ -98,4 +91,5 @@ k = 2
 solution = Solution()
 answer = solution.topKFrequent(nums, k)
 print(answer)  # Expected output: [20, 55], because 20 and 55 are the two most frequent numbers
+
 

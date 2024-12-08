@@ -29,8 +29,6 @@ Input: board =
 Output: false
 Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. 
 Since there are two 8's in the top left 3x3 sub-box, it is invalid.
-
-
 """
 
 class Solution:
@@ -72,6 +70,42 @@ class Solution:
 
 # Space Complexity:
 # O(1), because the space used for row_mask, col_mask, and square_mask is constant, regardless of the input.
+
+from collections import defaultdict
+
+class Solution:
+    def isValidSudoku(self, board: list[list[str]]) -> bool:
+        # Step 1: Initialize defaultdicts to store sets for rows, columns, and 3x3 squares
+        cols = defaultdict(set)  # Tracks numbers seen in each column
+        rows = defaultdict(set)  # Tracks numbers seen in each row
+        squares = defaultdict(set)  # Tracks numbers seen in each 3x3 square
+
+        # Step 2: Iterate through each cell in the 9x9 board
+        for r in range(9):
+            for c in range(9):
+                # Step 3: Skip empty cells represented by a "."
+                if board[r][c] == ".":
+                    continue
+                
+                # Step 4: Check if the current number has already been seen in the same row, column, or square
+                if (board[r][c] in rows[r] or 
+                    board[r][c] in cols[c] or 
+                    board[r][c] in squares[(r // 3, c // 3)]):
+                    return False  # If it has been seen, the board is invalid
+                
+                # Step 5: Add the current number to the respective row, column, and square sets
+                rows[r].add(board[r][c])
+                cols[c].add(board[r][c])
+                squares[(r // 3, c // 3)].add(board[r][c])
+
+        # Step 6: If no conflicts are found, the Sudoku board is valid
+        return True
+
+# Time Complexity:
+# O(1), because the board always has a fixed size of 9x9, so the time complexity is constant regardless of the input.
+
+# Space Complexity:
+# O(1), because the space used for the defaultdicts storing the sets is constant, regardless of the input.
 
 # Test case 1
 board1 = [
@@ -117,4 +151,3 @@ board3 = [
 ]
 solution = Solution()
 print(solution.isValidSudoku(board3))  # Expected output: False
-
