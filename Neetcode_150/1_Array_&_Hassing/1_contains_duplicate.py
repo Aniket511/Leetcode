@@ -6,7 +6,6 @@ Easy
 Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
 Example 1:
-
 Input: nums = [1,2,3,1]
 Output: true
 Explanation: The element 1 occurs at the indices 0 and 3.
@@ -23,18 +22,20 @@ Output: true
 
 class Solution:
     def containsDuplicate(self, nums: list[int]) -> bool:
-        # Create an empty set to keep track of elements we've seen
+        # Step 1: Create an empty set to keep track of elements we've seen
+        # A set is chosen because it provides average (O(1)) time complexity for both insertions and membership checks, 
+        # which makes it efficient for checking duplicates
         seen = set()
 
-        # Iterate through each number in the input list `nums`
+        # Step 2: Iterate through each number in the input list `nums`
         for element in nums:
             # If the element is already in the set, it means it's a duplicate
             if element in seen:
                 return True  # Return True as soon as a duplicate is found
-            # If the element is not in the set, add it to the set
+            #Step 3: If the element is not in the set, add it to the set
             seen.add(element)
 
-        # If we finish iterating through the list without finding any duplicates,
+        # Step 4: If we finish iterating through the list without finding any duplicates,
         # it means all elements are unique, so return False
         return False
 

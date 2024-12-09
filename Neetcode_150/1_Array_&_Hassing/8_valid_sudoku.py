@@ -76,8 +76,8 @@ from collections import defaultdict
 class Solution:
     def isValidSudoku(self, board: list[list[str]]) -> bool:
         # Step 1: Initialize defaultdicts to store sets for rows, columns, and 3x3 squares
-        cols = defaultdict(set)  # Tracks numbers seen in each column
         rows = defaultdict(set)  # Tracks numbers seen in each row
+        cols = defaultdict(set)  # Tracks numbers seen in each column
         squares = defaultdict(set)  # Tracks numbers seen in each 3x3 square
 
         # Step 2: Iterate through each cell in the 9x9 board
@@ -109,15 +109,15 @@ class Solution:
 
 # Test case 1
 board1 = [
-    ["4", "2", ".", ".", "3", ".", ".", ".", "."],
-    ["1", ".", ".", "5", ".", ".", ".", ".", "."],
-    [".", "9", "8", ".", ".", ".", ".", ".", "3"],
-    ["5", ".", ".", ".", "6", ".", ".", ".", "4"],
-    [".", ".", ".", "8", ".", "3", ".", ".", "5"],
-    ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-    [".", ".", ".", ".", ".", ".", "2", ".", "."],
-    [".", ".", ".", "4", "1", "9", ".", ".", "8"],
-    [".", ".", ".", ".", "8", ".", ".", "7", "9"]
+    ["4","2",".",".","3",".",".",".","."],
+    ["1",".",".","5",".",".",".",".","."],
+    [".","9","8",".",".",".",".",".","3"],
+    ["5",".",".",".","6",".",".",".","4"],
+    [".",".",".","8",".","3",".",".","5"],
+    ["7",".",".",".","2",".",".",".","6"],
+    [".",".",".",".",".",".","2",".","."],
+    [".",".",".","4","1","9",".",".","8"],
+    [".",".",".",".","8",".",".","7","9"]
 ]
 solution = Solution()
 print(solution.isValidSudoku(board1))  # Expected output: True

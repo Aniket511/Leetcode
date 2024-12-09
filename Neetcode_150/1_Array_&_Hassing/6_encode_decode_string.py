@@ -3,8 +3,8 @@
 
 Medium
 
-Design an algorithm to encode a list of strings to a single string. The encoded string is then decoded back to the original list of strings.
-
+Design an algorithm to encode a list of strings to a single string. 
+The encoded string is then decoded back to the original list of strings.
 Please implement encode and decode
 
 Example 1:
@@ -37,14 +37,14 @@ class Solution:
         
         # Step 2: Iterate through the encoded string `s`
         while index < len(s):
-            # Step 3: Find the position of the '#' character (hash_pos)
-            hash_pos = index
-            while s[hash_pos] != '#':
-                hash_pos += 1
+            # Step 3: Find the position of the '#' character (hash_position)
+            hash_position = index
+            while s[hash_position] != '#':
+                hash_position += 1
             
             # Step 4: Extract the length of the string (substring before '#')
-            length = int(s[index:hash_pos])
-            index = hash_pos + 1  # Move index past the '#' character
+            length = int(s[index:hash_position])
+            index = hash_position + 1  # Move index past the '#' character
             
             # Step 5: Extract the substring of the specified length
             string = s[index:index + length]

@@ -18,24 +18,24 @@ class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         # Step 1: Count the frequency of each number in nums
         count = {}
-        for num in nums:
-            count[num] = 1 + count.get(num, 0)
+        for number in nums:
+            count[number] = 1 + count.get(number, 0)
 
         # Step 2: Create a list of empty lists to store numbers by their frequencies
         # freq[i] will hold all numbers that have a frequency of i
-        freq = [[] for i in range(len(nums) + 1)]
+        freq = [[] for element in range(len(nums) + 1)]
         
         # Step 3: Populate the freq list, placing numbers in the corresponding frequency bucket
-        for num, cnt in count.items():
-            freq[cnt].append(num)
+        for num, count in count.items():
+            freq[count].append(num)
 
         # Step 4: Collect the top k frequent elements from the freq list (in reverse order)
-        res = []
+        result = []
         for i in range(len(freq) - 1, 0, -1):  # Start from the highest frequency
             for num in freq[i]:
-                res.append(num)
-                if len(res) == k:  # Once we've found k elements, return the result
-                    return res
+                result.append(num)
+                if len(result) == k:  # Once we've found k elements, return the result
+                    return result
 
 # Time Complexity:
 # O(n), where n is the number of elements in `nums`. Counting frequencies takes O(n), and the rest of the steps 
@@ -72,11 +72,11 @@ class Solution:
                 heapq.heappop(heap)  # Remove the least frequent element if heap size exceeds k
 
         # Step 3: Extract the top k frequent elements from the heap
-        res = []  # List to store the result
+        result = []  # List to store the result
         while heap:
-            res.append(heapq.heappop(heap)[1])  # Extract the 'number' part of (frequency, number)
+            result.append(heapq.heappop(heap)[1])  # Extract the 'number' part of (frequency, number)
 
-        return res  # Return most frequent first (heap contains the k most frequent elements)
+        return result  # Return most frequent first (heap contains the k most frequent elements)
 
 # Time Complexity:
 # O(n log k), where n is the number of elements in `nums` and k is the number of top frequent elements to return.

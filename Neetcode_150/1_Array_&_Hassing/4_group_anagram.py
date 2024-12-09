@@ -28,6 +28,7 @@ class Solution:
     def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
         # Step 1: Initialize a defaultdict of lists to store grouped anagrams
         # Each key will be a tuple representing the character count, and the value will be a list of words.
+        # Defaultdict provides a default value for nonexistent keys and allows us to group together elements by a common key.
         hashmap = defaultdict(list)
 
         # Step 2: Iterate through each word in the input list `strs`
