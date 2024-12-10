@@ -28,30 +28,37 @@ Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We ret
 
 class Solution:
     def twoSum(self, numbers: list[int], target: int) -> list[int]:
-        # Initialize two pointers: left (l) and right (r)
+        # Step 1: Initialize two pointers, left_pointer and right_pointer on both end of the list
         left_pointer, right_pointer = 0, len(numbers) - 1
 
-        # Loop until the pointers meet
+        # Step 2: Loop until the two pointers meet 
         while left_pointer < right_pointer:
-            # Calculate the current sum of the elements at the two pointers
+            # Step 3: Calculate the current sum of the elements at both pointers
             current_sum = numbers[left_pointer] + numbers[right_pointer]
 
-            # If the sum is greater than the target, move the right pointer leftward to decrease the sum
+            # Step 4: If the current sum is greater than the target, move the right pointer leftward to decrease the sum
             if current_sum > target:
                 right_pointer -= 1
-            # If the sum is less than the target, move the left pointer rightward to increase the sum
+            # Step 5: If the current sum is less than the target, move the left pointer rightward to increase the sum
             elif current_sum < target:
                 left_pointer += 1
-            # If the sum is equal to the target, return the 1-based indices
+            # Step 6: If the current sum equals the target, return the 1-based indices
             else:
                 return [left_pointer + 1, right_pointer + 1]
         
-        # Return an empty list if no such pair is found
+        # Step 7: If no valid pair is found, return an empty list
         return []
+
+# Time Complexity:
+# O(n), where n is the length of the `numbers` list.
+# We only iterate through the list once, and each pointer moves at most n times.
+
+# Space Complexity:
+# O(1), since we only use a constant amount of extra space for the two pointers.
 
 # Test cases to validate the solution
 
-# Test case 1: Normal case
+# Test case 1: Normal case with a valid pair
 numbers1 = [2, 7, 11, 15]
 target1 = 9
 solution1 = Solution()
@@ -63,7 +70,7 @@ target2 = 3
 solution2 = Solution()
 print(solution2.twoSum(numbers2, target2))  # Expected output: [1, 2]
 
-# Test case 3: No valid pair
+# Test case 3: No valid pair exists in the list
 numbers3 = [1, 2, 3, 4, 5]
 target3 = 10
 solution3 = Solution()

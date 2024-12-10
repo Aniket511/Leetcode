@@ -31,6 +31,8 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 Since there are two 8's in the top left 3x3 sub-box, it is invalid.
 """
 
+# Bitmask
+
 class Solution:
     def isValidSudoku(self, board: list[list[str]]) -> bool:
         # Step 1: Initialize arrays to keep track of the numbers seen in each row, column, and 3x3 square.
@@ -70,6 +72,8 @@ class Solution:
 
 # Space Complexity:
 # O(1), because the space used for row_mask, col_mask, and square_mask is constant, regardless of the input.
+
+# Hash Set(One Pass)
 
 from collections import defaultdict
 

@@ -21,39 +21,53 @@ Output: 1
 """
 
 class Solution:
-    def maxArea(self, height: list[int]) -> int:
-        # Initialize variable to keep track of the maximum area
+    def maxArea(self, heights: list[int]) -> int:
+        # Step 1: Initialize variable to keep track of the maximum area
         max_area = 0
         
-        # Initialize two pointers: left pointer at the start and right pointer at the end of the list
-        left, right = 0, len(height) - 1
+        # Step 2: Initialize two pointers:
+        # - left_pointer at the start (0th index)
+        # - right_pointer at the end (last index)
+        left_pointer, right_pointer = 0, len(heights) - 1
 
-        # Iterate while the two pointers do not cross each other
-        while left < right:
-            # Calculate the area formed by the lines at the left and right pointers
-            # The area is the width (right - left) times the smaller height
-            max_area = max(max_area, (right - left) * min(height[left], height[right]))
+        # Step 3: Iterate while the left pointer is less than the right pointer
+        while left_pointer < right_pointer:
+            # Step 4: Calculate the area formed by the lines at left_pointer and right_pointer
+            # The area is the width (right_pointer - left_pointer) times the smaller of the two heights
+            current_area = (right_pointer - left_pointer) * min(heights[left_pointer], heights[right_pointer])
+            
+            # Step 5: Update max_area if the current area is larger
+            max_area = max(max_area, current_area)
 
-            # Move the pointer pointing to the smaller height to try and increase the area
-            if height[left] < height[right]:
-                left += 1
+            # Step 6: Move the pointer pointing to the smaller height inward to possibly increase the area
+            if heights[left_pointer] < heights[right_pointer]:
+                left_pointer += 1
             else:
-                right -= 1
+                right_pointer -= 1
         
-        # Return the maximum area found
+        # Step 7: Return the maximum area found
         return max_area
 
+# Time Complexity:
+# O(n), where n is the number of elements in the input list. 
+# We only iterate through the list once with the two-pointer technique.
+
+# Space Complexity:
+# O(1), since we only use a constant amount of extra space for variables like `max_area`, `left_pointer`, and `right_pointer`.
+
+# Test cases to validate the solution
+
 # Test case 1: Example with multiple possibilities
-height1 = [1,8,6,2,5,4,8,3,7]
+height1 = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 solution1 = Solution()
 print(solution1.maxArea(height1))  # Expected output: 49
 
 # Test case 2: Example with all heights the same
-height2 = [1,1,1,1,1]
+height2 = [1, 1, 1, 1, 1]
 solution2 = Solution()
 print(solution2.maxArea(height2))  # Expected output: 4
 
 # Test case 3: Example with increasing height
-height3 = [1,2,3,4,5]
+height3 = [1, 2, 3, 4, 5]
 solution3 = Solution()
 print(solution3.maxArea(height3))  # Expected output: 6
